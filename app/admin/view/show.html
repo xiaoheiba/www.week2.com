@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<h2>展示</h2>
+<form action="">
+    <input type="text" name="search" placeholder="请输入标题搜索" value="{$search}">
+    <select name="searchD">
+        <option value="">...</option>
+        {foreach ($dataType as $v)}
+        <option value="{$v['a_id']}" {$v['a_id']== $searchD ? 'selected' : ''}>{$v['a_name']}</option>
+        {/foreach}
+    </select>
+    <input type="submit" value="搜索">
+</form>
+<table class="table">
+    <tr>
+        <td>ID</td>
+        <td>标题</td>
+        <td>作者</td>
+        <td>分类</td>
+        <td>简介</td>
+        <td>图片</td>
+        <td>富文本</td>
+        <td>软删除</td>
+    </tr>
+    {foreach($data as $v)}
+    <tr>
+        <td>{$v['id']}</td>
+        <td>{$v['title']}</td>
+        <td>{$v['author']}</td>
+        <td>{$v['a_name']}</td>
+        <td>{$v['textarea']}</td>
+        <td><img src="/image/{$v['image']}" width="100px"></td>
+        <td>{$v['tests']|raw}</td>
+        <td><a href="/admin/del?id={$v['id']}">删除</a></td>
+    </tr>
+    {/foreach}
+</table>
+{$data|raw}
+</body>
+</html>
